@@ -1,0 +1,7 @@
+# Environment
+.env
+.env.*
+
+# Keys
+firebase_key.json
+
