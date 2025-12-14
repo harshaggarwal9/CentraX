@@ -5,7 +5,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
-from app.models.models import Batch as Batch 
+from app.models.models import batches as Batch 
 from app.schema.schema import Batch as BatchBase 
 from app.core.authen import get_current_user 
 

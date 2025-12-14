@@ -194,3 +194,25 @@ class teachers(Base):
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
+class batch_teachers(Base):
+    __tablename__ = "batch_teachers"
+
+    id = Column(Integer, primary_key=True, index=True)
+    batch_id = Column(Integer, ForeignKey("batches.id"), nullable=False)
+    teacher_id = Column(Integer, ForeignKey("teachers.id"), nullable=False)
+
+
+class timetable_slots(Base):
+    __tablename__ = "timetable_slots"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    teacher_id = Column(Integer, ForeignKey("teachers.id"), nullable=False, index=True)
+    class_id = Column(Integer, ForeignKey("batches.id"), nullable=False, index=True)
+    subject_id = Column(Integer, nullable=False)  # keep simple for now
+
+    day = Column(String, nullable=False)
+    start_time = Column(String, nullable=False)
+    end_time = Column(String, nullable=False)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

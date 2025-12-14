@@ -54,16 +54,6 @@ class Content(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-class Comment(BaseModel):
-    id: int
-    content_id: int
-    author_id: int
-    text: str
-    created_at: datetime
-    is_public: bool = True
-
-    model_config = ConfigDict(from_attributes=True)
-
 
 class Schedule(BaseModel):
     id: int
@@ -222,3 +212,30 @@ class SlotRead(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class BatchTeacherCreate(BaseModel):
+    batch_id: int
+    teacher_id: int
+
+
+class BatchTeacherRead(BaseModel):
+    id: int
+    batch_id: int
+    teacher_id: int
+
+    model_config = ConfigDict(from_attributes=True)    
+
+class CommentCreate(BaseModel):
+    content_id: int
+    text: str
+
+
+class CommentRead(BaseModel):
+    id: int
+    content_id: int
+    author_id: int
+    text: str
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)    

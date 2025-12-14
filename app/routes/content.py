@@ -6,6 +6,8 @@ from app.db.session import get_db
 from app.models.models import contents, comments,users, enrollments, batches  
 from app.schema import ContentRead, CommentCreate, CommentRead
 from app.core.authen import get_current_user
+from app.models.models import ContentTypeEnum
+
 
 router = APIRouter(prefix="/contents", tags=["contents"])
 
@@ -33,7 +35,7 @@ def upload_content(
     storage_url: str,
     description: str = "",
     content_type: str = "video",
-    batch_id: int | None = None,
+    batch_id: Optional[int] = None,
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user)
 ):
@@ -47,13 +49,13 @@ def upload_content(
             raise HTTPException(status_code=404, detail="Batch not found")
 
     new_content = contents(
-        title=title,
-        description=description,
-        storage_url=storage_url,
-        content_type=content_type,
-        uploader_id=current_user.id,
-        batch_id=batch_id,
-    )
+    title=title,
+    description=description,
+    storage_url=storage_url,
+    content_type=ContentTypeEnum(content_type),
+    uploader_id=current_user.id,
+    batch_id=batch_id,
+)
 
     db.add(new_content)
     db.commit()
